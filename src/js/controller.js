@@ -27,8 +27,8 @@ const controlRecipes = async function () {
     bookmarksView.update(model.state.bookmarks);
 
     // 2) Loading recipe
-    // await model.loadRecipe(id);
-    const { recipe } = model.state;
+    await model.loadRecipe(id);
+    // const { recipe } = model.state;
 
     // 3) Rendering recipe
     recipeView.render(model.state.recipe);
@@ -44,20 +44,20 @@ const controlSearchResults = async function () {
 
     // 1) Get search query
     const query = searchView.getQuery();
-    // if (!query) return;
+    if (!query) return;
 
     // 2) Load search results
     await model.loadSearchResults(query);
     // 3) Render results
     resultsView.render(model.state.search.results);
-    // resultsView.render(await model.getSearchResultsPage());
+    resultsView.render(await model.getSearchResultsPage());
 
     // 4) Render initial pagination buttons
     paginationView.render(model.state.search);
 
     // // 5) Render sorting buttons and send data to sort
     sortView.render(model.state.search.resultsPage);
-    // sortView.render(model.state.search.results);
+    sortView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
   }
